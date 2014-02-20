@@ -40,3 +40,12 @@
 [submodule "externals/Vector2Extensions"]
 	path = externals/Vector2Extensions
 	url = git@github.com:dmanning23/Vector2Extensions.git
+[submodule "externals/HadoukInput"]
+	path = externals/HadoukInput
+	url = git@github.com:dmanning23/HadoukInput.git
+[submodule "externals/XNA"]
+	path = externals/XNA
+	url = git@github.com:dmanning23/XnaCompiledResources.git
+[submodule "externals/BulletMLFlockingExamples"]
+	path = externals/BulletMLFlockingExamples
+	url = git@github.com:dmanning23/BulletMLFlockingExamples.git
