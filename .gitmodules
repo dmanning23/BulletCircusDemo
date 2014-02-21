@@ -49,3 +49,12 @@
 [submodule "externals/BulletMLFlockingExamples"]
 	path = externals/BulletMLFlockingExamples
 	url = git@github.com:dmanning23/BulletMLFlockingExamples.git
+[submodule "externals/BulletFlockBuddy"]
+	path = externals/BulletFlockBuddy
+	url = git@github.com:dmanning23/BulletFlockBuddy.git
+[submodule "externals/FontBuddy"]
+	path = externals/FontBuddy
+	url = git@github.com:dmanning23/FontBuddy.git
+[submodule "externals/FrameRateCounter"]
+	path = externals/FrameRateCounter
+	url = git@github.com:dmanning23/FrameRateCounter.git
