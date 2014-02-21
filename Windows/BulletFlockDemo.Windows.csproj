@@ -32,6 +32,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="..\externals\XNA\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\ArialBlack14.xnb">
+      <Link>Content\ArialBlack14.xnb</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Source\Content\Sprites\bullet.png">
+      <Link>Content\Sprites\bullet.png</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\externals\BulletMLLib\Source\Content\bulletml.dtd">
+      <Link>Content\Samples\bulletml.dtd</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +100,36 @@
       <Project>{7de47032-a904-4c29-bd22-2d235e8d91ba}</Project>
       <Name>MonoGame.Framework.WindowsGL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\88way %282%29.xml">
+      <Link>Content\Samples\88way %282%29.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[Bulletsmorph]_kunekune_plus_homing.xml">
+      <Link>Content\Samples\[Bulletsmorph]_kunekune_plus_homing.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[G_DARIUS]_homing_laser.xml">
+      <Link>Content\Samples\[G_DARIUS]_homing_laser.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[Original]_stop_and_run.xml">
+      <Link>Content\Samples\[Original]_stop_and_run.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[OtakuTwo]_self-0081.xml">
+      <Link>Content\Samples\[OtakuTwo]_self-0081.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[Progear]_round_3_boss_back_burst.xml">
+      <Link>Content\Samples\[Progear]_round_3_boss_back_burst.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[XEVIOUS]_garu_zakato.xml">
+      <Link>Content\Samples\[XEVIOUS]_garu_zakato.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

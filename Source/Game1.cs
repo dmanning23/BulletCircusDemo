@@ -27,7 +27,7 @@ namespace BulletFlockDemo
 		Texture2D texture;
 		static public Myship myship;
 
-		BulletBoidManager _moverManager;
+		SimpleBulletManager _moverManager;
 
 		GameClock _clock;
 
@@ -70,7 +70,8 @@ namespace BulletFlockDemo
 			_inputState = new InputState();
 			_inputWrapper = new InputWrapper(new ControllerWrapper(PlayerIndex.One, true), _clock.GetCurrentTime);
 			_inputWrapper.Controller.UseKeyboard = true;
-			_moverManager = new BulletBoidManager(myship.Position);
+			_moverManager = new SimpleBulletManager(myship.Position);
+			_moverManager.StartPosition = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
 
 			//add an fps counter
 			FPSCounter fps = new FPSCounter(this);
@@ -216,7 +217,8 @@ namespace BulletFlockDemo
 				_moverManager.Scale += 0.1f;
 			}
 
-			_moverManager.Update(gameTime);
+			//_moverManager.Update(gameTime);
+			_moverManager.Update();
 
 			myship.Update();
 
@@ -260,9 +262,11 @@ namespace BulletFlockDemo
 			_text.Write(rankText.ToString(), position, Justify.Left, 1.0f, Color.White, spriteBatch);
 			position.Y += _text.Font.MeasureString("test").Y;
 
-			foreach (BulletBoid boid in _moverManager.Bullets)
+			foreach (var boid in _moverManager.Bullets)
 			{
-				boid.MyBoid.Render(prim, Color.Green);
+				spriteBatch.Draw(texture, boid.Position, Color.Black);
+
+				//boid.MyBoid.Render(prim, Color.Green);
 			}
 
 			spriteBatch.Draw(texture, myship.pos, Color.Black);
@@ -278,8 +282,7 @@ namespace BulletFlockDemo
 			_moverManager.Clear();
 
 			//add a new bullet in the center of the screen
-			BulletBoid mover = _moverManager.CreateBullet() as BulletBoid;
-			//mover.pos = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
+			var mover = _moverManager.CreateBullet();
 			mover.InitTopNode(_myPatterns[_CurrentPattern].RootNode);
 		}
 
