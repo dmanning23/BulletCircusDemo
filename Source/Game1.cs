@@ -1,17 +1,21 @@
+using BasicPrimitiveBuddy;
+using BulletFlockBuddy;
 using BulletMLLib;
-using FrameRateCounter;
+using FlockBuddy;
 using FontBuddyLib;
+using FrameRateCounter;
 using GameTimer;
 using HadoukInput;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using RandomExtensions;
+using ResolutionBuddy;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using BulletFlockBuddy;
-using BasicPrimitiveBuddy;
+using Vector2Extensions;
 
 namespace BulletFlockDemo
 {
@@ -27,7 +31,7 @@ namespace BulletFlockDemo
 		Texture2D texture;
 		static public Myship myship;
 
-		SimpleBulletManager _moverManager;
+		BulletBoidManager _moverManager;
 
 		GameClock _clock;
 
@@ -55,6 +59,10 @@ namespace BulletFlockDemo
 
 		XNABasicPrimitive prim;
 
+		List<BaseEntity> Obstacles { get; set; }
+
+		Random g_Random = new Random();
+
 		#endregion //Members
 
 		#region Methods
@@ -62,16 +70,24 @@ namespace BulletFlockDemo
 		public Game1()
 		{
 			graphics = new GraphicsDeviceManager(this);
-
+			graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft;
+			Resolution.Init(ref graphics);
 			Content.RootDirectory = "Content";
+			Resolution.SetDesiredResolution(1280, 720);
+			Resolution.SetScreenResolution(1280, 720, false);
+
 			myship = new Myship();
 
 			_clock = new GameClock();
 			_inputState = new InputState();
 			_inputWrapper = new InputWrapper(new ControllerWrapper(PlayerIndex.One, true), _clock.GetCurrentTime);
 			_inputWrapper.Controller.UseKeyboard = true;
-			_moverManager = new SimpleBulletManager(myship.Position);
+			_moverManager = new BulletBoidManager(myship.Position);
 			_moverManager.StartPosition = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
+			_moverManager.SetWorldSize(new Vector2(Resolution.ScreenArea.Width, Resolution.ScreenArea.Height), true, true, 5, 4);
+
+			Obstacles = new List<BaseEntity>();
+			_moverManager.Obstacles = Obstacles;
 
 			//add an fps counter
 			FPSCounter fps = new FPSCounter(this);
@@ -217,8 +233,16 @@ namespace BulletFlockDemo
 				_moverManager.Scale += 0.1f;
 			}
 
-			//_moverManager.Update(gameTime);
-			_moverManager.Update();
+			//add an obstacle
+			if (_inputWrapper.Controller.CheckKeystroke(EKeystroke.B))
+			{
+				Vector2 pos = g_Random.NextVector2(100.0f, 900.0f, 100.0f, 600.0f);
+				float radius = g_Random.NextFloat(150.0f, 250.0f);
+				AddObstacle(pos, radius);
+			}
+
+			_moverManager.Update(gameTime);
+			//_moverManager.Update();
 
 			myship.Update();
 
@@ -229,7 +253,20 @@ namespace BulletFlockDemo
 		{
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
-			spriteBatch.Begin();
+#if WINDOWS
+			// Calculate Proper Viewport according to Aspect Ratio
+			Resolution.ResetViewport();
+#endif
+
+			spriteBatch.Begin(SpriteSortMode.Deferred,
+			BlendState.AlphaBlend,
+			null, null, null, null,
+			Resolution.TransformationMatrix());
+
+			if (_moverManager.UseCellSpace)
+			{
+				_moverManager.DrawCells(prim);
+			}
 
 			Vector2 position = Vector2.Zero;
 
@@ -264,9 +301,12 @@ namespace BulletFlockDemo
 
 			foreach (var boid in _moverManager.Bullets)
 			{
-				spriteBatch.Draw(texture, boid.Position, Color.Black);
+				boid.MyBoid.Render(prim, Color.Green);
+			}
 
-				//boid.MyBoid.Render(prim, Color.Green);
+			foreach (var dude in Obstacles)
+			{
+				dude.DrawPhysics(prim, Color.White);
 			}
 
 			spriteBatch.Draw(texture, myship.pos, Color.Black);
@@ -284,6 +324,12 @@ namespace BulletFlockDemo
 			//add a new bullet in the center of the screen
 			var mover = _moverManager.CreateBullet();
 			mover.InitTopNode(_myPatterns[_CurrentPattern].RootNode);
+		}
+
+		public void AddObstacle(Vector2 pos, float radius)
+		{
+			var obs = new BaseEntity(pos, radius);
+			Obstacles.Add(obs);
 		}
 
 		#endregion //Methods

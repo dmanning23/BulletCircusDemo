@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -32,6 +32,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\HomingMissile.xml">
+      <Link>Content\Samples\HomingMissile.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\MissileCloud.xml">
+      <Link>Content\Samples\MissileCloud.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[G_DARIUS]_homing_laser.xml">
+      <Link>Content\Samples\[G_DARIUS]_homing_laser.xml</Link>
+    </Content>
     <Content Include="..\externals\XNA\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\ArialBlack14.xnb">
       <Link>Content\ArialBlack14.xnb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -100,36 +111,18 @@
       <Project>{7de47032-a904-4c29-bd22-2d235e8d91ba}</Project>
       <Name>MonoGame.Framework.WindowsGL</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\88way %282%29.xml">
-      <Link>Content\Samples\88way %282%29.xml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[Bulletsmorph]_kunekune_plus_homing.xml">
-      <Link>Content\Samples\[Bulletsmorph]_kunekune_plus_homing.xml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[G_DARIUS]_homing_laser.xml">
-      <Link>Content\Samples\[G_DARIUS]_homing_laser.xml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[Original]_stop_and_run.xml">
-      <Link>Content\Samples\[Original]_stop_and_run.xml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[OtakuTwo]_self-0081.xml">
-      <Link>Content\Samples\[OtakuTwo]_self-0081.xml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[Progear]_round_3_boss_back_burst.xml">
-      <Link>Content\Samples\[Progear]_round_3_boss_back_burst.xml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[XEVIOUS]_garu_zakato.xml">
-      <Link>Content\Samples\[XEVIOUS]_garu_zakato.xml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <ProjectReference Include="..\externals\RandomExtensions\Windows\RandomExtensions.Windows.csproj">
+      <Project>{f0bba30f-66e1-4e2f-bdf6-e17ff317c34e}</Project>
+      <Name>RandomExtensions.Windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\externals\ResolutionBuddy\Windows\ResolutionBuddy.Windows.csproj">
+      <Project>{28342df0-0089-4a2a-b3d4-6dcd65d6d8e4}</Project>
+      <Name>ResolutionBuddy.Windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\externals\Vector2Extensions\Windows\Vector2Extensions.Windows.csproj">
+      <Project>{2c5acada-d15a-4193-ba0a-d36a362075f4}</Project>
+      <Name>Vector2Extensions.Windows</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
