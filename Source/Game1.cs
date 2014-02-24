@@ -29,7 +29,8 @@ namespace BulletFlockDemo
 		static public GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 		Texture2D texture;
-		static public Myship myship;
+
+		List<Mover> playerShip;
 
 		BulletBoidManager _moverManager;
 
@@ -76,15 +77,18 @@ namespace BulletFlockDemo
 			Resolution.SetDesiredResolution(1280, 720);
 			Resolution.SetScreenResolution(1280, 720, false);
 
-			myship = new Myship();
+			Myship dude = new Myship();
+			playerShip = new List<Mover>();
+			playerShip.Add(dude);
 
 			_clock = new GameClock();
 			_inputState = new InputState();
 			_inputWrapper = new InputWrapper(new ControllerWrapper(PlayerIndex.One, true), _clock.GetCurrentTime);
 			_inputWrapper.Controller.UseKeyboard = true;
-			_moverManager = new BulletBoidManager(myship.Position);
+			_moverManager = new BulletBoidManager(dude.MyPos);
 			_moverManager.StartPosition = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
 			_moverManager.SetWorldSize(new Vector2(Resolution.ScreenArea.Width, Resolution.ScreenArea.Height), true, true, 5, 4);
+			_moverManager.Targets = playerShip;
 
 			Obstacles = new List<BaseEntity>();
 			_moverManager.Obstacles = Obstacles;
@@ -96,8 +100,6 @@ namespace BulletFlockDemo
 
 		protected override void Initialize()
 		{
-			myship.Init();
-
 			_clock.Start();
 
 			base.Initialize();
@@ -242,9 +244,11 @@ namespace BulletFlockDemo
 			}
 
 			_moverManager.Update(gameTime);
-			//_moverManager.Update();
 
-			myship.Update();
+			foreach (var dude in playerShip)
+			{
+				dude.Update(_clock);
+			}
 
 			base.Update(gameTime);
 		}
@@ -309,7 +313,10 @@ namespace BulletFlockDemo
 				dude.DrawPhysics(prim, Color.White);
 			}
 
-			spriteBatch.Draw(texture, myship.pos, Color.Black);
+			foreach (var dude in playerShip)
+			{
+				dude.Render(prim, Color.Black);
+			}
 
 			spriteBatch.End();
 

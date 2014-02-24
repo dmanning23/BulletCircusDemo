@@ -1,35 +1,61 @@
 ﻿using Microsoft.Xna.Framework;
+using GameTimer;
 using Microsoft.Xna.Framework.Input;
+using FlockBuddy;
 
 namespace BulletFlockDemo
 {
-	class Myship
+	class Myship : Mover
 	{
-		public Vector2 pos;
-		float speed = 3;
+		const float speed = 3;
 
-		public Vector2 Position()
+		public Myship()
+			: base(new Vector2(Game1.graphics.PreferredBackBufferWidth / 2, Game1.graphics.PreferredBackBufferHeight / 2),
+				10.0f, Vector2.UnitY, 0.0f, 1.0f, 100.0f, 2.0f, 100.0f)
 		{
-			return pos;
 		}
 
-		public void Init()
+		public Vector2 MyPos()
 		{
-			pos.X = Game1.graphics.PreferredBackBufferWidth / 2;
-			pos.Y = Game1.graphics.PreferredBackBufferHeight / 2; ;
+			return Position;
 		}
 
-		public void Update()
+		public override void Update(GameClock time)
 		{
+			base.Update(time);
+
+			Vector2 pos = Position;
+
 			if (Keyboard.GetState().IsKeyDown(Keys.Left))
+			{
 				pos.X -= speed;
-			if (Keyboard.GetState().IsKeyDown(Keys.Right))
+				Speed = speed * 60.0f;
+				Heading = new Vector2(-1.0f, 0.0f);
+			}
+			else if (Keyboard.GetState().IsKeyDown(Keys.Right))
+			{
 				pos.X += speed;
-			if (Keyboard.GetState().IsKeyDown(Keys.Up))
+				Speed = speed * 60.0f;
+				Heading = new Vector2(1.0f, 0.0f);
+			}
+			else if (Keyboard.GetState().IsKeyDown(Keys.Up))
+			{
 				pos.Y -= speed;
-			if (Keyboard.GetState().IsKeyDown(Keys.Down))
+				Speed = speed * 60.0f;
+				Heading = new Vector2(0.0f, -1.0f);
+			}
+			else if (Keyboard.GetState().IsKeyDown(Keys.Down))
+			{
 				pos.Y += speed;
+				Speed = speed * 60.0f;
+				Heading = new Vector2(0.0f, 1.0f);
+			}
+			else
+			{
+				Speed = 0.0f;
+			}
 
+			Position = pos;
 		}
 	}
 }
