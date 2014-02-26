@@ -32,7 +32,8 @@ namespace BulletFlockDemo
 
 		List<Mover> playerShip;
 
-		BulletBoidManager _moverManager;
+		//BulletBoidManager _moverManager;
+		SimpleBulletManager _moverManager;
 
 		GameClock _clock;
 
@@ -85,13 +86,14 @@ namespace BulletFlockDemo
 			_inputState = new InputState();
 			_inputWrapper = new InputWrapper(new ControllerWrapper(PlayerIndex.One, true), _clock.GetCurrentTime);
 			_inputWrapper.Controller.UseKeyboard = true;
-			_moverManager = new BulletBoidManager(dude.MyPos);
+			//_moverManager = new BulletBoidManager(dude.MyPos);
+			_moverManager = new SimpleBulletManager(dude.MyPos);
 			_moverManager.StartPosition = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
-			_moverManager.SetWorldSize(new Vector2(Resolution.ScreenArea.Width, Resolution.ScreenArea.Height), true, true, 5, 4);
-			_moverManager.Targets = playerShip;
+			//_moverManager.SetWorldSize(new Vector2(Resolution.ScreenArea.Width, Resolution.ScreenArea.Height), true, true, 5, 4);
+			//_moverManager.Targets = playerShip;
 
 			Obstacles = new List<BaseEntity>();
-			_moverManager.Obstacles = Obstacles;
+			//_moverManager.Obstacles = Obstacles;
 
 			//add an fps counter
 			FPSCounter fps = new FPSCounter(this);
@@ -243,7 +245,8 @@ namespace BulletFlockDemo
 				AddObstacle(pos, radius);
 			}
 
-			_moverManager.Update(gameTime);
+			//_moverManager.Update(gameTime);
+			_moverManager.Update();
 
 			foreach (var dude in playerShip)
 			{
@@ -267,10 +270,10 @@ namespace BulletFlockDemo
 			null, null, null, null,
 			Resolution.TransformationMatrix());
 
-			if (_moverManager.UseCellSpace)
-			{
-				_moverManager.DrawCells(prim);
-			}
+			//if (_moverManager.UseCellSpace)
+			//{
+			//	_moverManager.DrawCells(prim);
+			//}
 
 			Vector2 position = Vector2.Zero;
 
@@ -305,7 +308,8 @@ namespace BulletFlockDemo
 
 			foreach (var boid in _moverManager.Bullets)
 			{
-				boid.MyBoid.Render(prim, Color.Green);
+				//boid.MyBoid.Render(prim, Color.Green);
+				boid.Render(prim, Color.Green);
 			}
 
 			foreach (var dude in Obstacles)
