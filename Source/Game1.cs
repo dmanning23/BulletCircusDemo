@@ -32,8 +32,8 @@ namespace BulletFlockDemo
 
 		List<Mover> playerShip;
 
-		//BulletBoidManager _moverManager;
-		SimpleBulletManager _moverManager;
+		BulletBoidManager _boidManager;
+		SimpleBulletManager _simpleManager;
 
 		GameClock _clock;
 
@@ -86,14 +86,17 @@ namespace BulletFlockDemo
 			_inputState = new InputState();
 			_inputWrapper = new InputWrapper(new ControllerWrapper(PlayerIndex.One, true), _clock.GetCurrentTime);
 			_inputWrapper.Controller.UseKeyboard = true;
-			//_moverManager = new BulletBoidManager(dude.MyPos);
-			_moverManager = new SimpleBulletManager(dude.MyPos);
-			_moverManager.StartPosition = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
-			//_moverManager.SetWorldSize(new Vector2(Resolution.ScreenArea.Width, Resolution.ScreenArea.Height), true, true, 5, 4);
-			//_moverManager.Targets = playerShip;
+
+			_boidManager = new BulletBoidManager(dude.MyPos);
+			_boidManager.StartPosition = new Vector2(Resolution.ScreenArea.Width / 2, Resolution.ScreenArea.Height / 2);
+			_boidManager.SetWorldSize(new Vector2(Resolution.ScreenArea.Width, Resolution.ScreenArea.Height), true, false, 5, 4);
+			_boidManager.Targets = playerShip;
+
+			_simpleManager = new SimpleBulletManager(dude.MyPos);
+			_simpleManager.StartPosition = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
 
 			Obstacles = new List<BaseEntity>();
-			//_moverManager.Obstacles = Obstacles;
+			_boidManager.Obstacles = Obstacles;
 
 			//add an fps counter
 			FPSCounter fps = new FPSCounter(this);
@@ -220,21 +223,25 @@ namespace BulletFlockDemo
 			//if y is held down, do some slowdown
 			if (_inputWrapper.Controller.CheckKeystroke(EKeystroke.Y))
 			{
-				_moverManager.TimeSpeed = 0.5f;
+				_boidManager.TimeSpeed = 0.5f;
+				_simpleManager.TimeSpeed = 0.5f;
 			}
 			else
 			{
-				_moverManager.TimeSpeed = 1.0f;
+				_boidManager.TimeSpeed = 1.0f;
+				_simpleManager.TimeSpeed = 1.0f;
 			}
 
 			//if b is held down, make it bigger
 			if (_inputWrapper.Controller.CheckKeystroke(EKeystroke.LTrigger))
 			{
-				_moverManager.Scale -= 0.1f;
+				_boidManager.Scale -= 0.1f;
+				_simpleManager.Scale -= 0.1f;
 			}
 			else if (_inputWrapper.Controller.CheckKeystroke(EKeystroke.RTrigger))
 			{
-				_moverManager.Scale += 0.1f;
+				_boidManager.Scale += 0.1f;
+				_simpleManager.Scale += 0.1f;
 			}
 
 			//add an obstacle
@@ -245,8 +252,8 @@ namespace BulletFlockDemo
 				AddObstacle(pos, radius);
 			}
 
-			//_moverManager.Update(gameTime);
-			_moverManager.Update();
+			_boidManager.Update(gameTime);
+			_simpleManager.Update();
 
 			foreach (var dude in playerShip)
 			{
@@ -270,10 +277,10 @@ namespace BulletFlockDemo
 			null, null, null, null,
 			Resolution.TransformationMatrix());
 
-			//if (_moverManager.UseCellSpace)
-			//{
-			//	_moverManager.DrawCells(prim);
-			//}
+			if (_boidManager.UseCellSpace)
+			{
+				_boidManager.DrawCells(prim);
+			}
 
 			Vector2 position = Vector2.Zero;
 
@@ -282,7 +289,7 @@ namespace BulletFlockDemo
 			position.Y += _text.Font.MeasureString("test").Y;
 
 			//how many bullets on the screen
-			_text.Write(_moverManager.Bullets.Count.ToString(), position, Justify.Left, 1.0f, Color.White, spriteBatch);
+			_text.Write(_boidManager.Bullets.Count.ToString(), position, Justify.Left, 1.0f, Color.White, spriteBatch);
 			position.Y += _text.Font.MeasureString("test").Y;
 
 			//the current rank
@@ -295,21 +302,26 @@ namespace BulletFlockDemo
 			//the current time speed
 			rankText = new StringBuilder();
 			rankText.Append("Time Speed: ");
-			rankText.Append(_moverManager.TimeSpeed.ToString());
+			rankText.Append(_boidManager.TimeSpeed.ToString());
 			_text.Write(rankText.ToString(), position, Justify.Left, 1.0f, Color.White, spriteBatch);
 			position.Y += _text.Font.MeasureString("test").Y;
 
 			//the current scale
 			rankText = new StringBuilder();
 			rankText.Append("Scale: ");
-			rankText.Append(_moverManager.Scale.ToString());
+			rankText.Append(_boidManager.Scale.ToString());
 			_text.Write(rankText.ToString(), position, Justify.Left, 1.0f, Color.White, spriteBatch);
 			position.Y += _text.Font.MeasureString("test").Y;
 
-			foreach (var boid in _moverManager.Bullets)
+			foreach (var boid in _boidManager.Bullets)
 			{
-				//boid.MyBoid.Render(prim, Color.Green);
+				boid.MyBoid.Render(prim, Color.Green);
 				boid.Render(prim, Color.Green);
+			}
+
+			foreach (var boid in _simpleManager.Bullets)
+			{
+				boid.Render(prim, Color.Red);
 			}
 
 			foreach (var dude in Obstacles)
@@ -330,11 +342,16 @@ namespace BulletFlockDemo
 		private void AddBullet()
 		{
 			//clear out all the bulelts
-			_moverManager.Clear();
+			_boidManager.Clear();
+			_simpleManager.Clear();
 
 			//add a new bullet in the center of the screen
-			var mover = _moverManager.CreateBullet();
-			mover.InitTopNode(_myPatterns[_CurrentPattern].RootNode);
+			var boid = _boidManager.CreateBullet();
+			boid.InitTopNode(_myPatterns[_CurrentPattern].RootNode);
+
+			//TODO: comment this back in if you want to see the default BulletMLLib behavior
+			//var simple = _simpleManager.CreateBullet();
+			//simple.InitTopNode(_myPatterns[_CurrentPattern].RootNode);
 		}
 
 		public void AddObstacle(Vector2 pos, float radius)
