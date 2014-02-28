@@ -315,7 +315,6 @@ namespace BulletFlockDemo
 
 			foreach (var boid in _boidManager.Bullets)
 			{
-				boid.MyBoid.Render(prim, Color.Green);
 				boid.Render(prim, Color.Green);
 			}
 
