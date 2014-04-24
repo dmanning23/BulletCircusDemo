@@ -1,5 +1,5 @@
 using BasicPrimitiveBuddy;
-using BulletFlockBuddy;
+using BulletCircus;
 using BulletMLLib;
 using FlockBuddy;
 using FontBuddyLib;
@@ -17,7 +17,7 @@ using System.IO;
 using System.Text;
 using Vector2Extensions;
 
-namespace BulletFlockDemo
+namespace BulletCircusDemo
 {
 	/// <summary>
 	/// This is the main type for your game
@@ -32,7 +32,7 @@ namespace BulletFlockDemo
 
 		List<Mover> playerShip;
 
-		BulletBoidManager _boidManager;
+		SimpleMissileManager _boidManager;
 		SimpleBulletManager _simpleManager;
 
 		GameClock _clock;
@@ -87,7 +87,7 @@ namespace BulletFlockDemo
 			_inputWrapper = new InputWrapper(new ControllerWrapper(PlayerIndex.One, true), _clock.GetCurrentTime);
 			_inputWrapper.Controller.UseKeyboard = true;
 
-			_boidManager = new BulletBoidManager(dude.MyPos);
+			_boidManager = new SimpleMissileManager(dude.MyPos);
 			_boidManager.StartPosition = new Vector2(Resolution.ScreenArea.Width / 2, Resolution.ScreenArea.Height / 2);
 			_boidManager.SetWorldSize(new Vector2(Resolution.ScreenArea.Width, Resolution.ScreenArea.Height), true, false, 5, 4);
 			_boidManager.Targets = playerShip;

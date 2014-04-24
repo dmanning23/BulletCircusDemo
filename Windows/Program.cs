@@ -1,6 +1,6 @@
 using System;
 
-namespace BulletFlockDemo.Windows
+namespace BulletCircusDemo.Windows
 {
 	static class Program
 	{

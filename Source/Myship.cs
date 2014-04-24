@@ -1,9 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FlockBuddy;
 using GameTimer;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using FlockBuddy;
 
-namespace BulletFlockDemo
+namespace BulletCircusDemo
 {
 	class Myship : Mover
 	{
