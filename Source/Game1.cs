@@ -65,6 +65,8 @@ namespace BulletCircusDemo
 
 		Random g_Random = new Random();
 
+		BulletSprite _sprite;
+
 		#endregion //Members
 
 		#region Methods
@@ -134,6 +136,9 @@ namespace BulletCircusDemo
 			}
 
 			GameManager.GameDifficulty = this.GetRank;
+
+			Texture2D tex = Content.Load<Texture2D>(@"Sprites\bullet");
+			_sprite = new BulletSprite(tex);
 
 			AddBullet();
 		}
@@ -315,11 +320,13 @@ namespace BulletCircusDemo
 
 			foreach (var boid in _boidManager.Bullets)
 			{
+				boid.Render(spriteBatch, _sprite, Color.White);
 				boid.Render(prim, Color.Green);
 			}
 
 			foreach (var boid in _simpleManager.Bullets)
 			{
+				boid.Render(spriteBatch, _sprite, Color.White);
 				boid.Render(prim, Color.Red);
 			}
 
