@@ -40,7 +40,7 @@ namespace BulletCircusDemo
 		InputState _inputState;
 		InputWrapper _inputWrapper;
 
-		float _Rank = 0.0f;
+		float _Rank = 1.0f;
 
 		private FontBuddy _text = new FontBuddy();
 
@@ -90,6 +90,8 @@ namespace BulletCircusDemo
 			_inputWrapper.Controller.UseKeyboard = true;
 
 			_boidManager = new SimpleMissileManager(dude.MyPos);
+			//_boidManager.StartHeading = Math.PI.ToVector2();
+			_boidManager.StartHeading = Vector2.UnitX;
 			_boidManager.StartPosition = new Vector2(Resolution.ScreenArea.Width / 2, Resolution.ScreenArea.Height / 2);
 			_boidManager.SetWorldSize(new Vector2(Resolution.ScreenArea.Width, Resolution.ScreenArea.Height), true, false, 5, 4);
 			_boidManager.Targets = playerShip;
@@ -200,7 +202,7 @@ namespace BulletCircusDemo
 			}
 
 			//increase/decrease the rank
-			if (_inputWrapper.Controller.CheckKeystroke(EKeystroke.LShoulder))
+			if (_inputWrapper.Controller.CheckKeystroke(EKeystroke.Y))
 			{
 				if (_Rank > 0.0f)
 				{
@@ -212,7 +214,7 @@ namespace BulletCircusDemo
 					_Rank = 0.0f;
 				}
 			}
-			else if (_inputWrapper.Controller.CheckKeystroke(EKeystroke.RShoulder))
+			else if (_inputWrapper.Controller.CheckKeystroke(EKeystroke.X))
 			{
 				if (_Rank < 1.0f)
 				{
@@ -223,18 +225,6 @@ namespace BulletCircusDemo
 				{
 					_Rank = 1.0f;
 				}
-			}
-
-			//if y is held down, do some slowdown
-			if (_inputWrapper.Controller.CheckKeystroke(EKeystroke.Y))
-			{
-				_boidManager.TimeSpeed = 0.5f;
-				_simpleManager.TimeSpeed = 0.5f;
-			}
-			else
-			{
-				_boidManager.TimeSpeed = 1.0f;
-				_simpleManager.TimeSpeed = 1.0f;
 			}
 
 			//if b is held down, make it bigger
