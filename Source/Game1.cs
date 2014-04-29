@@ -247,8 +247,8 @@ namespace BulletCircusDemo
 				AddObstacle(pos, radius);
 			}
 
-			_boidManager.Update(gameTime);
-			_simpleManager.Update(gameTime);
+			_boidManager.Update(_clock);
+			_simpleManager.Update(_clock);
 
 			foreach (var dude in playerShip)
 			{
