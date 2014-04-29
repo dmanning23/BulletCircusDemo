@@ -248,7 +248,7 @@ namespace BulletCircusDemo
 			}
 
 			_boidManager.Update(gameTime);
-			_simpleManager.Update();
+			_simpleManager.Update(gameTime);
 
 			foreach (var dude in playerShip)
 			{
