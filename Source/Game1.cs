@@ -89,7 +89,7 @@ namespace BulletCircusDemo
 			_inputWrapper = new InputWrapper(new ControllerWrapper(PlayerIndex.One, true), _clock.GetCurrentTime);
 			_inputWrapper.Controller.UseKeyboard = true;
 
-			_boidManager = new SimpleMissileManager(dude.MyPos);
+			_boidManager = new SimpleMissileManager();
 			//_boidManager.StartHeading = Math.PI.ToVector2();
 			_boidManager.StartHeading = Vector2.UnitX;
 			_boidManager.StartPosition = new Vector2(Resolution.ScreenArea.Width / 2, Resolution.ScreenArea.Height / 2);
