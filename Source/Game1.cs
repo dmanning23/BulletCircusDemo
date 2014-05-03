@@ -342,8 +342,7 @@ namespace BulletCircusDemo
 			_simpleManager.Clear();
 
 			//add a new bullet in the center of the screen
-			var boid = _boidManager.CreateBullet();
-			boid.InitTopNode(_myPatterns[_CurrentPattern].RootNode);
+			_boidManager.Shoot(_myPatterns[_CurrentPattern]);
 
 			//TODO: comment this back in if you want to see the default BulletMLLib behavior
 			//var simple = _simpleManager.CreateBullet();
