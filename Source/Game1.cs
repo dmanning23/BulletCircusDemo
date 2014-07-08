@@ -30,7 +30,7 @@ namespace BulletCircusDemo
 		SpriteBatch spriteBatch;
 		Texture2D texture;
 
-		List<Mover> playerShip;
+		List<IMover> playerShip;
 
 		SimpleMissileManager _boidManager;
 		SimpleBulletManager _simpleManager;
@@ -61,7 +61,7 @@ namespace BulletCircusDemo
 
 		XNABasicPrimitive prim;
 
-		List<BaseEntity> Obstacles { get; set; }
+		List<IBaseEntity> Obstacles { get; set; }
 
 		Random g_Random = new Random();
 
@@ -81,7 +81,7 @@ namespace BulletCircusDemo
 			Resolution.SetScreenResolution(1280, 720, false);
 
 			Myship dude = new Myship();
-			playerShip = new List<Mover>();
+			playerShip = new List<IMover>();
 			playerShip.Add(dude);
 
 			_clock = new GameClock();
@@ -99,7 +99,7 @@ namespace BulletCircusDemo
 			_simpleManager = new SimpleBulletManager(dude.MyPos);
 			_simpleManager.StartPosition = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
 
-			Obstacles = new List<BaseEntity>();
+			Obstacles = new List<IBaseEntity>();
 			_boidManager.Obstacles = Obstacles;
 
 			//add an fps counter
@@ -252,7 +252,8 @@ namespace BulletCircusDemo
 
 			foreach (var dude in playerShip)
 			{
-				dude.Update(_clock);
+				var myDude = dude as Mover;
+				myDude.Update(_clock);
 			}
 
 			base.Update(gameTime);
@@ -322,7 +323,8 @@ namespace BulletCircusDemo
 
 			foreach (var dude in Obstacles)
 			{
-				dude.DrawPhysics(prim, Color.White);
+				var myDude = dude as BaseEntity;
+				myDude.DrawPhysics(prim, Color.White);
 			}
 
 			foreach (var dude in playerShip)
