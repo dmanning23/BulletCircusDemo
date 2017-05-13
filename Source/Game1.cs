@@ -1,4 +1,4 @@
-using BasicPrimitiveBuddy;
+using PrimitiveBuddy;
 using BulletCircus;
 using BulletMLLib;
 using FlockBuddy;
@@ -59,7 +59,7 @@ namespace BulletCircusDemo
 		/// </summary>
 		private int _CurrentPattern = 0;
 
-		XNABasicPrimitive prim;
+		Primitive prim;
 
 		List<IBaseEntity> Obstacles { get; set; }
 
@@ -75,7 +75,7 @@ namespace BulletCircusDemo
 		{
 			graphics = new GraphicsDeviceManager(this);
 			graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft;
-			Resolution.Init(ref graphics);
+			Resolution.Init(graphics);
 			Content.RootDirectory = "Content";
 			Resolution.SetDesiredResolution(1280, 720);
 			Resolution.SetScreenResolution(1280, 720, false);
@@ -103,7 +103,7 @@ namespace BulletCircusDemo
 			_boidManager.Obstacles = Obstacles;
 
 			//add an fps counter
-			FPSCounter fps = new FPSCounter(this);
+			var fps = new FrameRateCounter.FpsCounter(this);
 			this.Components.Add(fps);
 		}
 
@@ -119,7 +119,7 @@ namespace BulletCircusDemo
 		protected override void LoadContent()
 		{
 			spriteBatch = new SpriteBatch(GraphicsDevice);
-			prim = new XNABasicPrimitive(GraphicsDevice, spriteBatch);
+			prim = new Primitive(GraphicsDevice, spriteBatch);
 
 			_text.LoadContent(Content, "ArialBlack14");
 
