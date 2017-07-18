@@ -75,10 +75,9 @@ namespace BulletCircusDemo
 		{
 			graphics = new GraphicsDeviceManager(this);
 			graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft;
-			Resolution.Init(graphics);
 			Content.RootDirectory = "Content";
-			Resolution.SetDesiredResolution(1280, 720);
-			Resolution.SetScreenResolution(1280, 720, false);
+
+			var res = new ResolutionComponent(this, graphics, new Point(1280, 720), new Point(1280, 720), false, false);
 
 			Myship dude = new Myship();
 			playerShip = new List<IMover>();
@@ -94,7 +93,7 @@ namespace BulletCircusDemo
 			_boidManager.StartHeading = Vector2.UnitX;
 			_boidManager.StartPosition = new Vector2(Resolution.ScreenArea.Width / 2, Resolution.ScreenArea.Height / 2);
 			_boidManager.SetWorldSize(new Vector2(Resolution.ScreenArea.Width, Resolution.ScreenArea.Height), true, false, 5, 4);
-			_boidManager.Targets = playerShip;
+			//_boidManager.Targets = playerShip;
 
 			_simpleManager = new SimpleBulletManager(dude.MyPos);
 			_simpleManager.StartPosition = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
@@ -103,7 +102,7 @@ namespace BulletCircusDemo
 			_boidManager.Obstacles = Obstacles;
 
 			//add an fps counter
-			var fps = new FrameRateCounter.FpsCounter(this);
+			var fps = new FpsCounter(this, "ArialBlack14");
 			this.Components.Add(fps);
 		}
 
@@ -263,11 +262,6 @@ namespace BulletCircusDemo
 		{
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
-#if WINDOWS
-			// Calculate Proper Viewport according to Aspect Ratio
-			Resolution.ResetViewport();
-#endif
-
 			spriteBatch.Begin(SpriteSortMode.Deferred,
 			BlendState.AlphaBlend,
 			null, null, null, null,
@@ -281,32 +275,32 @@ namespace BulletCircusDemo
 			Vector2 position = Vector2.Zero;
 
 			//say what pattern we are shooting
-			_text.Write(_patternNames[_CurrentPattern], position, Justify.Left, 1.0f, Color.White, spriteBatch);
+			_text.Write(_patternNames[_CurrentPattern], position, Justify.Left, 1.0f, Color.White, spriteBatch, _clock);
 			position.Y += _text.Font.MeasureString("test").Y;
 
 			//how many bullets on the screen
-			_text.Write(_boidManager.Bullets.Count.ToString(), position, Justify.Left, 1.0f, Color.White, spriteBatch);
+			_text.Write(_boidManager.Bullets.Count.ToString(), position, Justify.Left, 1.0f, Color.White, spriteBatch, _clock);
 			position.Y += _text.Font.MeasureString("test").Y;
 
 			//the current rank
 			StringBuilder rankText = new StringBuilder();
 			rankText.Append("Rank: ");
 			rankText.Append(((int)(_Rank * 10)).ToString());
-			_text.Write(rankText.ToString(), position, Justify.Left, 1.0f, Color.White, spriteBatch);
+			_text.Write(rankText.ToString(), position, Justify.Left, 1.0f, Color.White, spriteBatch, _clock);
 			position.Y += _text.Font.MeasureString("test").Y;
 
 			//the current time speed
 			rankText = new StringBuilder();
 			rankText.Append("Time Speed: ");
 			rankText.Append(_boidManager.TimeSpeed.ToString());
-			_text.Write(rankText.ToString(), position, Justify.Left, 1.0f, Color.White, spriteBatch);
+			_text.Write(rankText.ToString(), position, Justify.Left, 1.0f, Color.White, spriteBatch, _clock);
 			position.Y += _text.Font.MeasureString("test").Y;
 
 			//the current scale
 			rankText = new StringBuilder();
 			rankText.Append("Scale: ");
 			rankText.Append(_boidManager.Scale.ToString());
-			_text.Write(rankText.ToString(), position, Justify.Left, 1.0f, Color.White, spriteBatch);
+			_text.Write(rankText.ToString(), position, Justify.Left, 1.0f, Color.White, spriteBatch, _clock);
 			position.Y += _text.Font.MeasureString("test").Y;
 
 			foreach (var boid in _boidManager.Bullets)
@@ -329,7 +323,7 @@ namespace BulletCircusDemo
 
 			foreach (var dude in playerShip)
 			{
-				dude.Render(prim, Color.Black);
+				//dude.Render(prim, Color.Black);
 			}
 
 			spriteBatch.End();

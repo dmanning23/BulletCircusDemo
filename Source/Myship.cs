@@ -2,6 +2,7 @@
 using GameTimer;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using ResolutionBuddy;
 
 namespace BulletCircusDemo
 {
@@ -10,8 +11,7 @@ namespace BulletCircusDemo
 		const float speed = 3;
 
 		public Myship()
-			: base(new Vector2(Game1.graphics.PreferredBackBufferWidth / 2, Game1.graphics.PreferredBackBufferHeight / 2),
-				10.0f, Vector2.UnitY, 0.0f, 1.0f, 100.0f, 2.0f, 100.0f)
+			: base(Resolution.TitleSafeArea.Center.ToVector2(), 10.0f, Vector2.UnitY, 0f)
 		{
 		}
 
