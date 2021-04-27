@@ -77,7 +77,7 @@ namespace BulletCircusDemo
 			graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft;
 			Content.RootDirectory = "Content";
 
-			var res = new ResolutionComponent(this, graphics, new Point(1280, 720), new Point(1280, 720), false, false);
+			IResolution resolution = new ResolutionComponent(this, graphics, new Point(1280, 720), new Point(1024, 768), false, true, false);
 
 			Myship dude = new Myship();
 			playerShip = new List<IMover>();
@@ -85,14 +85,14 @@ namespace BulletCircusDemo
 
 			_clock = new GameClock();
 			_inputState = new InputState();
-			_inputWrapper = new InputWrapper(new ControllerWrapper(PlayerIndex.One, true), _clock.GetCurrentTime);
-			_inputWrapper.Controller.UseKeyboard = true;
+			_inputWrapper = new InputWrapper(new ControllerWrapper(0), _clock.GetCurrentTime);
+			Mappings.UseKeyboard[0] = true;
 
 			_boidManager = new SimpleMissileManager();
 			//_boidManager.StartHeading = Math.PI.ToVector2();
 			_boidManager.StartHeading = Vector2.UnitX;
 			_boidManager.StartPosition = new Vector2(Resolution.ScreenArea.Width / 2, Resolution.ScreenArea.Height / 2);
-			_boidManager.SetWorldSize(new Vector2(Resolution.ScreenArea.Width, Resolution.ScreenArea.Height), true, false, 5, 4);
+			//_boidManager.WorldSize = new Vector2(Resolution.ScreenArea.Width, Resolution.ScreenArea.Height);
 			//_boidManager.Targets = playerShip;
 
 			_simpleManager = new SimpleBulletManager(dude.MyPos);
@@ -276,32 +276,32 @@ namespace BulletCircusDemo
 
 			//say what pattern we are shooting
 			_text.Write(_patternNames[_CurrentPattern], position, Justify.Left, 1.0f, Color.White, spriteBatch, _clock);
-			position.Y += _text.Font.MeasureString("test").Y;
+			position.Y += _text.MeasureString("test").Y;
 
 			//how many bullets on the screen
 			_text.Write(_boidManager.Bullets.Count.ToString(), position, Justify.Left, 1.0f, Color.White, spriteBatch, _clock);
-			position.Y += _text.Font.MeasureString("test").Y;
+			position.Y += _text.MeasureString("test").Y;
 
 			//the current rank
 			StringBuilder rankText = new StringBuilder();
 			rankText.Append("Rank: ");
 			rankText.Append(((int)(_Rank * 10)).ToString());
 			_text.Write(rankText.ToString(), position, Justify.Left, 1.0f, Color.White, spriteBatch, _clock);
-			position.Y += _text.Font.MeasureString("test").Y;
+			position.Y += _text.MeasureString("test").Y;
 
 			//the current time speed
 			rankText = new StringBuilder();
 			rankText.Append("Time Speed: ");
 			rankText.Append(_boidManager.TimeSpeed.ToString());
 			_text.Write(rankText.ToString(), position, Justify.Left, 1.0f, Color.White, spriteBatch, _clock);
-			position.Y += _text.Font.MeasureString("test").Y;
+			position.Y += _text.MeasureString("test").Y;
 
 			//the current scale
 			rankText = new StringBuilder();
 			rankText.Append("Scale: ");
 			rankText.Append(_boidManager.Scale.ToString());
 			_text.Write(rankText.ToString(), position, Justify.Left, 1.0f, Color.White, spriteBatch, _clock);
-			position.Y += _text.Font.MeasureString("test").Y;
+			position.Y += _text.MeasureString("test").Y;
 
 			foreach (var boid in _boidManager.Bullets)
 			{
