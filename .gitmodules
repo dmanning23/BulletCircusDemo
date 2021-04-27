@@ -1,3 +1,7 @@
-[submodule "externals"]
-	path = externals
+
+[submodule "BulletMLExamples"]
+	path = BulletMLExamples
+	url = git@github.com:dmanning23/BulletMLExamples.git
+[submodule "BulletMLFlockingExamples"]
+	path = BulletMLFlockingExamples
 	url = git@github.com:dmanning23/BulletMLFlockingExamples.git

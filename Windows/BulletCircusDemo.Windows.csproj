@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{1822D385-FABA-4EAB-8208-72CE64A45B35}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BulletCircusDemo.Windows</RootNamespace>
     <AssemblyName>BulletCircusDemo.Windows</AssemblyName>
@@ -56,105 +56,102 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\88way.xml">
+    <Content Include="..\BulletMLFlockingExamples\Scripts\88way.xml">
       <Link>Content\Samples\88way.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\double_roll_seeds.xml">
+    <Content Include="..\BulletMLFlockingExamples\Scripts\double_roll_seeds.xml">
       <Link>Content\Samples\double_roll_seeds.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\HomingMissile.xml">
+    <Content Include="..\BulletMLFlockingExamples\Scripts\HomingMissile.xml">
       <Link>Content\Samples\HomingMissile.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\JetAntiMissiles.xml">
+    <Content Include="..\BulletMLFlockingExamples\Scripts\JetAntiMissiles.xml">
       <Link>Content\Samples\JetAntiMissiles.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\JetBullet.xml">
+    <Content Include="..\BulletMLFlockingExamples\Scripts\JetBullet.xml">
       <Link>Content\Samples\JetBullet.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\JetMissiles.xml">
+    <Content Include="..\BulletMLFlockingExamples\Scripts\JetMissiles.xml">
       <Link>Content\Samples\JetMissiles.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\MissileCloud.xml">
+    <Content Include="..\BulletMLFlockingExamples\Scripts\MissileCloud.xml">
       <Link>Content\Samples\MissileCloud.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\RobotAntiMissiles.xml">
+    <Content Include="..\BulletMLFlockingExamples\Scripts\RobotAntiMissiles.xml">
       <Link>Content\Samples\RobotAntiMissiles.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\RobotBullet.xml">
+    <Content Include="..\BulletMLFlockingExamples\Scripts\RobotBullet.xml">
       <Link>Content\Samples\RobotBullet.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\RobotMissiles.xml">
+    <Content Include="..\BulletMLFlockingExamples\Scripts\RobotMissiles.xml">
       <Link>Content\Samples\RobotMissiles.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[Bulletsmorph]_kunekune_plus_homing.xml">
+    <Content Include="..\BulletMLFlockingExamples\Scripts\[Bulletsmorph]_kunekune_plus_homing.xml">
       <Link>Content\Samples\[Bulletsmorph]_kunekune_plus_homing.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[Daiouzyou]_hibachi_maybe.xml">
+    <Content Include="..\BulletMLFlockingExamples\Scripts\[Daiouzyou]_hibachi_maybe.xml">
       <Link>Content\Samples\[Daiouzyou]_hibachi_maybe.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[G_DARIUS]_homing_laser.xml">
+    <Content Include="..\BulletMLFlockingExamples\Scripts\[G_DARIUS]_homing_laser.xml">
       <Link>Content\Samples\[G_DARIUS]_homing_laser.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[Original]_stop_and_run.xml">
+    <Content Include="..\BulletMLFlockingExamples\Scripts\[Original]_stop_and_run.xml">
       <Link>Content\Samples\[Original]_stop_and_run.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[OtakuTwo]_dis_bee_1.xml">
+    <Content Include="..\BulletMLFlockingExamples\Scripts\[OtakuTwo]_dis_bee_1.xml">
       <Link>Content\Samples\[OtakuTwo]_dis_bee_1.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[OtakuTwo]_self-0081.xml">
+    <Content Include="..\BulletMLFlockingExamples\Scripts\[OtakuTwo]_self-0081.xml">
       <Link>Content\Samples\[OtakuTwo]_self-0081.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[Progear]_round_1_boss_grow_bullets.xml">
+    <Content Include="..\BulletMLFlockingExamples\Scripts\[Progear]_round_1_boss_grow_bullets.xml">
       <Link>Content\Samples\[Progear]_round_1_boss_grow_bullets.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[Progear]_round_3_boss_back_burst.xml">
+    <Content Include="..\BulletMLFlockingExamples\Scripts\[Progear]_round_3_boss_back_burst.xml">
       <Link>Content\Samples\[Progear]_round_3_boss_back_burst.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[Progear]_round_6_boss_parabola_shot.xml">
+    <Content Include="..\BulletMLFlockingExamples\Scripts\[Progear]_round_6_boss_parabola_shot.xml">
       <Link>Content\Samples\[Progear]_round_6_boss_parabola_shot.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[STORM_CALIBAR]_last_boss_double_roll_bullets.xml">
+    <Content Include="..\BulletMLFlockingExamples\Scripts\[STORM_CALIBAR]_last_boss_double_roll_bullets.xml">
       <Link>Content\Samples\[STORM_CALIBAR]_last_boss_double_roll_bullets.xml</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\externals\BulletMLFlockingExamples\Scripts\[XEVIOUS]_garu_zakato.xml">
+    <Content Include="..\BulletMLFlockingExamples\Scripts\[XEVIOUS]_garu_zakato.xml">
       <Link>Content\Samples\[XEVIOUS]_garu_zakato.xml</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\externals\XNA\WindowsGame1\WindowsGame1\bin\x86\Debug\Content\ArialBlack14.xnb">
-      <Link>Content\ArialBlack14.xnb</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Source\Content\Sprites\bullet.png">
-      <Link>Content\Sprites\bullet.png</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\externals\BulletMLLib\Source\Content\bulletml.dtd">
-      <Link>Content\Samples\bulletml.dtd</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\XmlBuddy.Content.dll" />
     <None Include="App.config" />
+    <Content Include="Content\ArialBlack14.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sprites\bullet.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Content\bulletml.dtd" />
     <None Include="packages.config" />
   </ItemGroup>

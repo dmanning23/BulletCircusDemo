@@ -1,14 +1,13 @@
-using PrimitiveBuddy;
 using BulletCircus;
 using BulletMLLib;
 using FlockBuddy;
 using FontBuddyLib;
-using FrameRateCounter;
 using GameTimer;
 using HadoukInput;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using PrimitiveBuddy;
 using RandomExtensions;
 using ResolutionBuddy;
 using System;
@@ -76,39 +75,11 @@ namespace BulletCircusDemo
 			graphics = new GraphicsDeviceManager(this);
 			graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft;
 			Content.RootDirectory = "Content";
-
-			IResolution resolution = new ResolutionComponent(this, graphics, new Point(1280, 720), new Point(1024, 768), false, true, false);
-
-			Myship dude = new Myship();
-			playerShip = new List<IMover>();
-			playerShip.Add(dude);
-
-			_clock = new GameClock();
-			_inputState = new InputState();
-			_inputWrapper = new InputWrapper(new ControllerWrapper(0), _clock.GetCurrentTime);
-			Mappings.UseKeyboard[0] = true;
-
-			_boidManager = new SimpleMissileManager();
-			//_boidManager.StartHeading = Math.PI.ToVector2();
-			_boidManager.StartHeading = Vector2.UnitX;
-			_boidManager.StartPosition = new Vector2(Resolution.ScreenArea.Width / 2, Resolution.ScreenArea.Height / 2);
-			//_boidManager.WorldSize = new Vector2(Resolution.ScreenArea.Width, Resolution.ScreenArea.Height);
-			//_boidManager.Targets = playerShip;
-
-			_simpleManager = new SimpleBulletManager(dude.MyPos);
-			_simpleManager.StartPosition = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
-
-			Obstacles = new List<IBaseEntity>();
-			_boidManager.Obstacles = Obstacles;
-
-			//add an fps counter
-			var fps = new FpsCounter(this, "ArialBlack14");
-			this.Components.Add(fps);
 		}
 
 		protected override void Initialize()
 		{
-			_clock.Start();
+			IResolution resolution = new ResolutionComponent(this, graphics, new Point(1280, 720), new Point(1024, 768), false, true, false);
 
 			base.Initialize();
 		}
@@ -141,7 +112,31 @@ namespace BulletCircusDemo
 			Texture2D tex = Content.Load<Texture2D>(@"Sprites\bullet");
 			_sprite = new BulletSprite(tex);
 
+			Myship dude = new Myship();
+			playerShip = new List<IMover>();
+			playerShip.Add(dude);
+
+			_clock = new GameClock();
+			_inputState = new InputState();
+			_inputWrapper = new InputWrapper(new ControllerWrapper(0), _clock.GetCurrentTime);
+			Mappings.UseKeyboard[0] = true;
+
+			_boidManager = new SimpleMissileManager();
+			//_boidManager.StartHeading = Math.PI.ToVector2();
+			_boidManager.StartHeading = Vector2.UnitX;
+			_boidManager.StartPosition = new Vector2(Resolution.ScreenArea.Width / 2, Resolution.ScreenArea.Height / 2);
+			//_boidManager.WorldSize = new Vector2(Resolution.ScreenArea.Width, Resolution.ScreenArea.Height);
+			//_boidManager.Targets = playerShip;
+
+			_simpleManager = new SimpleBulletManager(dude.MyPos);
+			_simpleManager.StartPosition = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
+
+			Obstacles = new List<IBaseEntity>();
+			_boidManager.Obstacles = Obstacles;
+
 			AddBullet();
+
+			_clock.Start();
 		}
 
 		protected override void UnloadContent()
