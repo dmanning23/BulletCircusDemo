@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "bulletml.dtd">
+
+<bulletml
+          xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+	<action label="top1">
+		<actionRef label="rollShots">
+			<!--number of bullets to shoot-->
+			<param>($tier * 6)</param>
+			<!--amount of rotation based on num bullets-->
+			<param>(360 / 2) / ($tier * 6)</param>
+			<param>1</param>
+		</actionRef>
+	</action>
+
+	<action label="top2">
+		<actionRef label="rollShots">
+			<!--number of bullets to shoot-->
+			<param>($tier * 6)</param>
+			<!--amount of rotation based on num bullets-->
+			<param>(360 / 2) / ($tier * 6)</param>
+			<param>-1</param>
+		</actionRef>
+	</action>
+
+	<action label="rollShots">
+		<repeat>
+			<times>$1</times>
+			<action>
+				<fire>
+					<direction type="sequence">-1 * ($2 * $3)</direction>
+					<bulletRef label="backBurst"/>
+				</fire>
+				<wait>4</wait>
+			</action>
+		</repeat>
+	</action>
+
+	<bullet label="backBurst">
+		<speed>25</speed>
+		<action>
+			<wait>30+$rand*20</wait>
+
+			<changeSpeed>
+				<speed type="relative">3 + (8 * $tier)</speed>
+				<term>30</term>
+			</changeSpeed>
+
+			<repeat>
+				<times>80 + (40 * $tier)</times>
+				<action>
+					<changeDirection>
+						<direction type="aim">0</direction>
+						<term>0</term>
+					</changeDirection>
+					<wait>1</wait>
+				</action>
+			</repeat>
+
+			<wait>10</wait>
+			<vanish/>
+		</action>
+	</bullet>
+
+</bulletml>

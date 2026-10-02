@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "bulletml.dtd">
+
+<bulletml type="horizontal"
+          xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+	<action label="top">
+		<repeat>
+			<times>($tier * 10)</times>
+			<action>
+				<fire>
+					<!--shoot over a 90 degree arc behind this dude-->
+					<direction type="relative">45 - ($rand * 120)</direction>
+					<bulletRef label="backBurst"/>
+				</fire>
+				<wait>1</wait>
+			</action>
+		</repeat>
+	</action>
+
+	<bullet label="backBurst">
+		<speed>10</speed>
+		<action>
+			<wait>15+$rand*20</wait>
+
+			<changeSpeed>
+				<speed type="relative">15</speed>
+				<term>30</term>
+			</changeSpeed>
+
+			<repeat>
+				<times>60 + (40 * $tier)</times>
+				<action>
+					<changeDirection>
+						<direction type="aim">0</direction>
+						<term>0</term>
+					</changeDirection>
+					<wait>2</wait>
+				</action>
+			</repeat>
+
+			<wait>10</wait>
+			<vanish/>
+		</action>
+	</bullet>
+</bulletml>

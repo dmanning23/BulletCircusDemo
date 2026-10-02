@@ -10,6 +10,76 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:XmlBuddy.Content.dll
 
 #---------------------------------- Content ---------------------------------#
+
+#begin ArialBlack14.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:ArialBlack14.spritefont
+
+#begin bullet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:bullet.png
+
+#begin FlockingScripts/88way.xml
+/importer:XmlSourceImporter
+/processor:XmlDocumentProcessor
+/build:FlockingScripts/88way.xml
+
+#begin FlockingScripts/double_roll_seeds.xml
+/importer:XmlSourceImporter
+/processor:XmlDocumentProcessor
+/build:FlockingScripts/double_roll_seeds.xml
+
+#begin FlockingScripts/HomingMissile.xml
+/importer:XmlSourceImporter
+/processor:XmlDocumentProcessor
+/build:FlockingScripts/HomingMissile.xml
+
+#begin FlockingScripts/JetAntiMissiles.xml
+/importer:XmlSourceImporter
+/processor:XmlDocumentProcessor
+/build:FlockingScripts/JetAntiMissiles.xml
+
+#begin FlockingScripts/JetBullet.xml
+/importer:XmlSourceImporter
+/processor:XmlDocumentProcessor
+/build:FlockingScripts/JetBullet.xml
+
+#begin FlockingScripts/JetMissiles.xml
+/importer:XmlSourceImporter
+/processor:XmlDocumentProcessor
+/build:FlockingScripts/JetMissiles.xml
+
+#begin FlockingScripts/MissileCloud.xml
+/importer:XmlSourceImporter
+/processor:XmlDocumentProcessor
+/build:FlockingScripts/MissileCloud.xml
+
+#begin FlockingScripts/RobotAntiMissiles.xml
+/importer:XmlSourceImporter
+/processor:XmlDocumentProcessor
+/build:FlockingScripts/RobotAntiMissiles.xml
+
+#begin FlockingScripts/RobotBullet.xml
+/importer:XmlSourceImporter
+/processor:XmlDocumentProcessor
+/build:FlockingScripts/RobotBullet.xml
+
+#begin FlockingScripts/RobotMissiles.xml
+/importer:XmlSourceImporter
+/processor:XmlDocumentProcessor
+/build:FlockingScripts/RobotMissiles.xml
 

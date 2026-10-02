@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<!DOCTYPE bulletml SYSTEM "bulletml.dtd">
+
+<bulletml type="vertical"
+          xmlns="http://www.asahi-net.or.jp/~cs8k-cyu/bulletml">
+
+	<action label="top">
+		<action>
+			<fire>
+				<direction type="relative">-(15 * (1.0 - $tier)) + ($rand * (30 * (1.0 - $tier)))</direction>
+				<bullet>
+					<speed>50 + (20 * $tier)</speed>
+					<action>
+						<wait>30 + (12 * $tier)</wait>
+						<vanish/>
+					</action>
+				</bullet>
+			</fire>
+		</action>
+	</action>
+	
+</bulletml>
