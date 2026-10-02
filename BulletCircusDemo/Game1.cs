@@ -100,36 +100,9 @@ namespace BulletCircusDemo
 
             texture = Content.Load<Texture2D>("bullet");
 
-            var scripts = new string[]
-            {
-                $"FlockingScripts/88way",
-                $"FlockingScripts/double_roll_seeds",
-                $"FlockingScripts/HomingMissile",
-                $"FlockingScripts/JetAntiMissile",
-                $"FlockingScripts/JetBullet",
-                $"FlockingScripts/JetMissiles",
-                $"FlockingScripts/MissileCloud",
-                $"FlockingScripts/RobotAntiMissiles",
-                $"FlockingScripts/RobotBullet",
-                $"FlockingScripts/RobotMissiles"
-            };
-
-            //Get all the xml files in the Content\\Samples directory
-            foreach (var script in scripts)
-            {
-                //store the name
-                _patternNames.Add(script);
-
-                //load the pattern
-                BulletPattern pattern = new BulletPattern(_simpleManager);
-                pattern.ParseXML(script, Content);
-                _myPatterns.Add(pattern);
-            }
-
             //GameManager.GameDifficulty = this.GetRank;
 
-            Texture2D tex = Content.Load<Texture2D>(@"Sprites\bullet");
-            _sprite = new BulletSprite(tex);
+            _sprite = new BulletSprite(texture);
 
             Myship dude = new Myship();
             playerShip = new List<IMover>();
@@ -149,9 +122,36 @@ namespace BulletCircusDemo
 
             _simpleManager = new SimpleBulletManager(dude.MyPos);
             _simpleManager.StartPosition = new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2);
+            _simpleManager.CallbackFunctions.Add("tier", () => 1f);
 
             Obstacles = new List<IBaseEntity>();
             _boidManager.Obstacles = Obstacles;
+
+            var scripts = new string[]
+            {
+                $"FlockingScripts/88way",
+                $"FlockingScripts/double_roll_seeds",
+                $"FlockingScripts/HomingMissile",
+                $"FlockingScripts/JetAntiMissiles",
+                $"FlockingScripts/JetBullet",
+                $"FlockingScripts/JetMissiles",
+                $"FlockingScripts/MissileCloud",
+                $"FlockingScripts/RobotAntiMissiles",
+                $"FlockingScripts/RobotBullet",
+                $"FlockingScripts/RobotMissiles"
+            };
+
+            //Get all the xml files in the Content\\Samples directory
+            foreach (var script in scripts)
+            {
+                //store the name
+                _patternNames.Add(script);
+
+                //load the pattern
+                BulletPattern pattern = new BulletPattern(_simpleManager);
+                pattern.ParseXML(script, Content);
+                _myPatterns.Add(pattern);
+            }
 
             AddBullet();
 
